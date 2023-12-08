@@ -10,15 +10,11 @@ class Curl
         $response = $this->connect($query, 1);
 
         $decodedResponse = json_decode($response, true);
-        if ($decodedResponse === null) {
-            echo 'Ошибка декодирования JSON';
-        } else {
-            $i = 0;
-            foreach ($decodedResponse as $row) {
-                $coordinates[$i]['lat'] = $row['lat'];
-                $coordinates[$i]['lon'] = $row['lon'];
-                $i++;
-            }
+        $i = 0;
+        foreach ($decodedResponse as $row) {
+            $coordinates[$i]['lat'] = $row['lat'];
+            $coordinates[$i]['lon'] = $row['lon'];
+            $i++;
         }
 
         return $coordinates;
@@ -29,11 +25,7 @@ class Curl
         $response = $this->connect($query, 2);
 
         $decodedResponse = json_decode($response, true);
-        if ($decodedResponse === null) {
-            echo 'Ошибка декодирования JSON';
-        } else {
-            $address = $decodedResponse['display_name'];
-        }
+        $address = $decodedResponse['display_name'];
 
         return $address;
     }
